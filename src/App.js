@@ -8,6 +8,7 @@ import Menu from './Components/Menu'
 import Gallery from './Components/Gallery'
 import Contact from './Components/Contact'
 import MenuCategory from './Components/MenuCategory' // ✅ correct import
+import Home from './Components/Home';
 
 const App = () => {
   return (
@@ -16,7 +17,7 @@ const App = () => {
 
       <Routes>
         {/* Home Page */}
-        <Route path='/' element={<Banner />} />
+        <Route path="/" element={<Home />} />
 
         {/* Menu Category Page */}
         <Route path="/service" element={<MenuCategory />} />

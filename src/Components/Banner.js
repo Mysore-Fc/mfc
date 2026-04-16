@@ -1,90 +1,144 @@
-import { Button, Typography } from '@mui/material'
-import Box from '@mui/material/Box'
+import { Button, Typography, Box, IconButton } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material'
-import IconButton from '@mui/material/IconButton'
 
 import coffeeImage1 from '../Assets/coffee.jpg'
 import coffeeImage2 from '../Assets/coffee1.jpg'
 import coffeeImage3 from '../Assets/coffee2.jpg'
 
-const Banners=[
-  {id:1, image:coffeeImage1, title: "Where every sip feels like a warm hug", button: 'click'},
-  {id:2, image:coffeeImage2, title: "Where every sip feels like a warm hug", button: 'click'},
-  {id:3, image:coffeeImage3, title: "Where every sip feels like a warm hug", button: 'click'}
+const Banners = [
+  {
+    id: 1,
+    image: coffeeImage1,
+    title: "Where every sip feels like a warm hug",
+    button: "Click"
+  },
+  {
+    id: 2,
+    image: coffeeImage2,
+    title: "Freshly brewed happiness in every cup",
+    button: "Click"
+  },
+  {
+    id: 3,
+    image: coffeeImage3,
+    title: "Start your day with perfect coffee",
+    button: "Click"
+  }
 ]
 
 const Banner = () => {
-  const[current, setValue]=useState(0);
+  const [current, setCurrent] = useState(0)
 
-  useEffect(()=>{
-    const time= setInterval(()=>{
-      setValue((prev)=>(prev+1)%Banners.length);
-    },4000);
-    return()=> clearInterval(time);
-  }, []);
-const previous=()=>{
-  setValue((prev)=>(prev===0?Banners.length-1:prev-1));
-}
-const next=()=>{
-  setValue((prev)=>(prev+1)%Banners.length);
-}
+  // Auto slider
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % Banners.length)
+    }, 4000)
+
+    return () => clearInterval(interval)
+  }, [])
+
+  // Previous slide
+  const previous = () => {
+    setCurrent((prev) =>
+      prev === 0 ? Banners.length - 1 : prev - 1
+    )
+  }
+
+  // Next slide
+  const next = () => {
+    setCurrent((prev) => (prev + 1) % Banners.length)
+  }
 
   return (
-    <Box sx={{position:'relative', overflow: 'hidden', width:'100vw', height: '667px'}}>
-    {Banners.map((Banner, index)=>(
-    <Box key={Banner.id}sx={{
-      backgroundImage: `url(${Banner.image})`,
-      position:'absolute',
-      width: '100%',
-      height: '667px',
-      left: `${(index - current)*100}%`,
-      backgroundRepeat: 'no-repeat',
-      display: 'flex',
-      justifyContent: 'flex-start',
-      alignItems: 'center',
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-      overflow: 'hidden',
-      zIndex: -1
-      }}>
-         <Box sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'flex-start',
-        gap: 3,   
-        ml: '50px'
-      }}>
-        <Typography
+    <Box
+      sx={{
+        position: 'relative',
+        overflow: 'hidden',
+        width: '100%',
+        height: { xs: '400px', md: '667px' }
+      }}
+    >
+
+      {/* Slides */}
+      {Banners.map((item, index) => (
+        <Box
+          key={item.id}
           sx={{
-            color: 'white',
-            fontSize: '50px',
-            fontWeight: 'bold',
-            width: '500px',
-            textAlign: 'left'
+            backgroundImage: `url(${item.image})`,
+            position: 'absolute',
+            width: '100%',
+            height: '100%',
+            left: `${(index - current) * 100}%`,
+            transition: 'all 0.8s ease-in-out',
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            display: 'flex',
+            alignItems: 'center'
           }}
         >
-         {Banner.title} 
-        </Typography>
+          <Box sx={{ ml: { xs: 3, md: 8 } }}>
+            <Typography
+              sx={{
+                color: 'white',
+                fontSize: { xs: 25, md: 50 },
+                fontWeight: 'bold',
+                width: { xs: '90%', md: 500 }
+              }}
+            >
+              {item.title}
+            </Typography>
 
-        <Button variant='contained'>
-         {Banner.button} 
-        </Button>
-      </Box>
+            <Button
+              variant="contained"
+              sx={{
+                mt: 2,
+                backgroundColor: '#440E03',
+                '&:hover': { backgroundColor: '#2d0902' }
+              }}
+            >
+              {item.button}
+            </Button>
+          </Box>
+        </Box>
+      ))}
+
+      {/* Left Button */}
+      <IconButton
+        onClick={previous}
+        sx={{
+          color: 'white',
+          position: 'absolute',
+          top: '50%',
+          left: 10,
+          transform: 'translateY(-50%)',
+          backgroundColor: 'rgba(0,0,0,0.3)',
+          '&:hover': { backgroundColor: 'rgba(0,0,0,0.5)' }
+        }}
+      >
+        <ArrowBackIos />
+      </IconButton>
+
+      {/* Right Button */}
+      <IconButton
+        onClick={next}
+        sx={{
+          color: 'white',
+          position: 'absolute',
+          top: '50%',
+          right: 10,
+          transform: 'translateY(-50%)',
+          backgroundColor: 'rgba(0,0,0,0.3)',
+          '&:hover': { backgroundColor: 'rgba(0,0,0,0.5)' }
+        }}
+      >
+        <ArrowForwardIos />
+      </IconButton>
+
     </Box>
-    ))}
-    <IconButton
-    onClick={previous}
-    sx={{color: 'white',top: '50%',position: 'absolute'}}>
-      <ArrowBackIos />
-    </IconButton>
-    <IconButton
-    onClick={next}
-    sx={{color:'white', top: '50%', position: 'absolute', right: 10}}>
-      <ArrowForwardIos />
-    </IconButton>
-    </Box>
-  );
+  )
 }
 
-export default Banner
+export default Banner 
