@@ -17,61 +17,61 @@ const Contact = () => {
     <Box
       sx={{
         minHeight: '100vh',
-        background:
-          'linear-gradient(135deg, #FFF1E6 0%, #FFF7F2 100%)',
-        px: { xs: 2, md: 8 },
-        py: 6
+        background: 'linear-gradient(135deg, #FFF1E6 0%, #FFF7F2 100%)',
+        px: { xs: 2, sm: 3, md: 8 },
+        py: { xs: 4, md: 6 }
       }}
     >
+
       {/* Header */}
-      <Box sx={{ textAlign: 'center', mb: 6 }}>
+      <Box sx={{ textAlign: 'center', mb: { xs: 4, md: 6 } }}>
         <Typography
-          variant="h3"
           sx={{
             fontWeight: 'bold',
             color: '#440E03',
-            mb: 1
+            mb: 1,
+            fontSize: { xs: 24, sm: 28, md: 36 }
           }}
         >
           Let’s Talk Coffee ☕
         </Typography>
-        <Typography variant="body1" color="text.secondary">
+
+        <Typography
+          sx={{ fontSize: { xs: 13, md: 16 }, color: '#666' }}
+        >
           Have a question, feedback, or just want to say hello?
         </Typography>
       </Box>
 
       {/* Main Content */}
-      <Grid container spacing={5} alignItems="stretch" sx={{flexWrap: 'nowrap'}}>
+      <Grid container spacing={{ xs: 3, md: 5 }}>
 
-        {/* Left Info Panel */}
-        <Grid item  md={4}>
+        {/* LEFT PANEL */}
+        <Grid item xs={12} md={4}>
           <Paper
             elevation={6}
             sx={{
-              p: 4,
-              height: '368px',
+              p: { xs: 3, md: 4 },
               borderRadius: 4,
-              background:
-                'linear-gradient(160deg, #440E03, #5a1608)',
-              color: 'white'
+              background: 'linear-gradient(160deg, #440E03, #5a1608)',
+              color: 'white',
+              height: '100%'   // responsive instead of fixed height
             }}
           >
-            <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 3 }}>
+            <Typography
+              sx={{
+                fontWeight: 'bold',
+                mb: 3,
+                fontSize: { xs: 18, md: 22 }
+              }}
+            >
               Mysore Filter Coffee Traditional
             </Typography>
 
             <Divider sx={{ bgcolor: 'rgba(255,255,255,0.3)', mb: 3 }} />
 
-            <InfoRow
-              icon={<PhoneIcon />}
-              text="+91 98765 43210"
-            />
-
-            <InfoRow
-              icon={<EmailIcon />}
-              text="mysorecoffee@gmail.com"
-            />
-
+            <InfoRow icon={<PhoneIcon />} text="+91 98765 43210" />
+            <InfoRow icon={<EmailIcon />} text="mysorecoffee@gmail.com" />
             <InfoRow
               icon={<LocationOnIcon />}
               text={
@@ -85,9 +85,10 @@ const Contact = () => {
 
             <Typography
               sx={{
-                mt: 4,
+                mt: 3,
                 fontStyle: 'italic',
-                opacity: 0.9
+                opacity: 0.9,
+                fontSize: { xs: 13, md: 14 }
               }}
             >
               “Every cup tells a story.”
@@ -95,32 +96,36 @@ const Contact = () => {
           </Paper>
         </Grid>
 
-        {/* Right Form */}
-        <Grid item  md={8} >
+        {/* RIGHT FORM */}
+        <Grid item xs={12} md={8}>
           <Paper
             elevation={6}
             sx={{
-              p: 4,
-              borderRadius: 4,
-              backgroundColor: 'white'
+              p: { xs: 3, md: 4 },
+              borderRadius: 4
             }}
           >
             <Typography
-              variant="h5"
-              sx={{ fontWeight: 'bold', mb: 1 }}
+              sx={{
+                fontWeight: 'bold',
+                mb: 1,
+                fontSize: { xs: 18, md: 22 }
+              }}
             >
               Send Us a Message
             </Typography>
 
             <Typography
-              variant="body2"
-              color="text.secondary"
-              sx={{ mb: 3 }}
+              sx={{
+                mb: 3,
+                color: '#666',
+                fontSize: { xs: 13, md: 14 }
+              }}
             >
               We’ll get back to you as soon as possible ☕
             </Typography>
 
-            <Grid container spacing={3}>
+            <Grid container spacing={{ xs: 2, md: 3 }}>
               <Grid item xs={12} sm={6}>
                 <TextField fullWidth label="Your Name" />
               </Grid>
@@ -142,13 +147,14 @@ const Contact = () => {
 
             <Button
               variant="contained"
+              fullWidth   // better for mobile
               sx={{
                 mt: 4,
-                backgroundColor: '#440E03',
-                px: 5,
                 py: 1.2,
-                borderRadius: 5,
                 fontWeight: 'bold',
+                borderRadius: 5,
+                fontSize: { xs: 14, md: 15 },
+                backgroundColor: '#440E03',
                 '&:hover': {
                   backgroundColor: '#5a1608'
                 }
@@ -161,35 +167,40 @@ const Contact = () => {
 
       </Grid>
 
-      {/* Map */}
-      <Box sx={{ mt: 7, p: 5 }}>
-        <Paper elevation={5} sx={{ borderRadius: 4, overflow: 'hidden'}}>
+      {/* MAP */}
+      <Box sx={{ mt: { xs: 5, md: 7 } }}>
+        <Paper elevation={5} sx={{ borderRadius: 4, overflow: 'hidden' }}>
           <iframe
             title="map"
             src="https://www.google.com/maps?q=Mysore%20Filter%20Coffee%20Traditional,%20Rajajinagar,%20Bengaluru&output=embed"
-            width="100%"
-            height="320"
-            style={{ border: 0 }}
+            style={{
+              width: '100%',
+              height: '100%',
+              minHeight: '250px'
+            }}
             loading="lazy"
-          ></iframe>
+          />
         </Paper>
       </Box>
+
     </Box>
   )
 }
 
-/* Reusable Info Row */
+/* Info Row */
 const InfoRow = ({ icon, text }) => (
   <Box
     sx={{
       display: 'flex',
       gap: 2,
-      mb: 3,
+      mb: 2.5,
       alignItems: 'flex-start'
     }}
   >
     {icon}
-    <Typography>{text}</Typography>
+    <Typography sx={{ fontSize: { xs: 13, md: 14 } }}>
+      {text}
+    </Typography>
   </Box>
 )
 

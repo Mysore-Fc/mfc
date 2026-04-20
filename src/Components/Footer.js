@@ -17,30 +17,52 @@ const Footer = () => {
       <Grid
         container
         spacing={4}
-        sx={{ px: { xs: 3, md: 8 }, py: 4 }}
-        alignItems="flex-start"
+        sx={{
+          px: { xs: 2, sm: 4, md: 8 },
+          py: { xs: 3, sm: 4 }
+        }}
       >
 
-        {/* Section 1: Brand */}
-        <Grid item xs={12} md={4}>
+        {/* Section 1 */}
+        <Grid item xs={12} sm={6} md={4}>
           <Box sx={{ textAlign: { xs: 'center', md: 'left' } }}>
-            <Typography variant="h6" sx={{ fontWeight: 'bold', mb: 1 }}>
+            <Typography
+              sx={{
+                fontWeight: 'bold',
+                mb: 1,
+                fontSize: { xs: 16, md: 20 }
+              }}
+            >
               Mysore Filter Coffee
             </Typography>
-            <Typography variant="body2" sx={{ lineHeight: 1.7 }}>
+
+            <Typography
+              variant="body2"
+              sx={{
+                lineHeight: 1.7,
+                fontSize: { xs: 13, md: 14 }
+              }}
+            >
               Serving authentic South Indian filter coffee with traditional
               brewing methods and rich aroma.
             </Typography>
           </Box>
         </Grid>
 
-        {/* Section 2: Social */}
-        <Grid item xs={12} md={4}>
+        {/* Section 2 */}
+        <Grid item xs={12} sm={6} md={4}>
           <Box sx={{ textAlign: { xs: 'center', md: 'left' } }}>
-            <Typography variant="h6" sx={{ fontWeight: 'bold', mb: 1 }}>
+            <Typography
+              sx={{
+                fontWeight: 'bold',
+                mb: 1,
+                fontSize: { xs: 16, md: 20 }
+              }}
+            >
               Connect With Us
             </Typography>
 
+            {/* Instagram */}
             <Box
               sx={{
                 display: 'flex',
@@ -56,9 +78,12 @@ const Footer = () => {
               >
                 <InstagramIcon />
               </IconButton>
-              <Typography variant="body2">mysorefiltercoffeetraditional</Typography>
+              <Typography variant="body2">
+                mysorefiltercoffeetraditional
+              </Typography>
             </Box>
 
+            {/* Location */}
             <Box
               sx={{
                 display: 'flex',
@@ -68,22 +93,30 @@ const Footer = () => {
                 mt: 1
               }}
             >
-               <IconButton
-                href="https://www.google.com/maps/dir/12.9662976,77.5585792/12.9916176,77.5545894/@12.9779896,77.5504136,15z/data=!3m1!4b1!4m4!4m3!1m1!4e1!1m0?entry=ttu&g_ep=EgoyMDI1MTIwOS4wIKXMDSoKLDEwMDc5MjA3M0gBUAM%3D"
+              <IconButton
+                href="https://www.google.com/maps"
                 target="_blank"
                 sx={{ color: 'white' }}
               >
-              <LocationOnIcon />
+                <LocationOnIcon />
               </IconButton>
-              <Typography variant="body2">Mysuru, Karnataka</Typography>
+              <Typography variant="body2">
+                Mysuru, Karnataka
+              </Typography>
             </Box>
           </Box>
         </Grid>
 
-        {/* Section 3: Map */}
+        {/* Section 3 */}
         <Grid item xs={12} md={4}>
           <Box sx={{ textAlign: { xs: 'center', md: 'left' } }}>
-            <Typography variant="h6" sx={{ fontWeight: 'bold', mb: 1 }}>
+            <Typography
+              sx={{
+                fontWeight: 'bold',
+                mb: 1,
+                fontSize: { xs: 16, md: 20 }
+              }}
+            >
               Visit Our Cafe
             </Typography>
 
@@ -96,11 +129,15 @@ const Footer = () => {
               <iframe
                 title="location"
                 src="https://www.google.com/maps?q=Mysore%20Filter%20Coffee%20Traditional,%20Rajajinagar,%20Bengaluru&output=embed"
-                width="100%"
-                height="150"
-                style={{ border: 0, borderRadius: 10, maxWidth: 320 }}
+                style={{
+                  border: 0,
+                  borderRadius: 10,
+                  width: '100%',
+                  maxWidth: 350,
+                  height: '160px'
+                }}
                 loading="lazy"
-              ></iframe>
+              />
             </Box>
           </Box>
         </Grid>
@@ -110,9 +147,12 @@ const Footer = () => {
       {/* Divider */}
       <Divider sx={{ backgroundColor: 'rgba(255,255,255,0.25)' }} />
 
-      {/* Bottom Section */}
+      {/* Bottom */}
       <Box sx={{ textAlign: 'center', py: 2 }}>
-        <Typography variant="body2">
+        <Typography
+          variant="body2"
+          sx={{ fontSize: { xs: 12, md: 14 } }}
+        >
           © {new Date().getFullYear()} Mysore Filter Coffee. All Rights Reserved.
         </Typography>
       </Box>

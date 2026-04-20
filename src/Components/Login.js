@@ -2,15 +2,16 @@ import React from 'react'
 import {
   Dialog,
   DialogContent,
-  DialogTitle,
   TextField,
   Button,
   Box,
   Slide,
   Typography,
   Divider,
-  IconButton
+  IconButton,
+  useMediaQuery
 } from '@mui/material'
+import { useTheme } from '@mui/material/styles'
 import CloseIcon from '@mui/icons-material/Close'
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -18,17 +19,20 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 })
 
 const Login = ({ open, onClose }) => {
+  const theme = useTheme()
+  const fullScreen = useMediaQuery(theme.breakpoints.down('sm'))
+
   return (
     <Dialog
       open={open}
       onClose={onClose}
       TransitionComponent={Transition}
-      keepMounted
+      fullScreen={fullScreen}   // ✅ mobile fullscreen
       maxWidth="xs"
       fullWidth
       PaperProps={{
         sx: {
-          borderRadius: 4,
+          borderRadius: { xs: 0, sm: 4 },
           boxShadow: '0 12px 40px rgba(0,0,0,0.25)'
         }
       }}
@@ -36,10 +40,9 @@ const Login = ({ open, onClose }) => {
       {/* Header */}
       <Box
         sx={{
-          background:
-            'linear-gradient(160deg, #440E03, #5a1608)',
+          background: 'linear-gradient(160deg, #440E03, #5a1608)',
           color: 'white',
-          p: 3,
+          p: { xs: 2, sm: 3 },
           position: 'relative',
           textAlign: 'center'
         }}
@@ -56,36 +59,48 @@ const Login = ({ open, onClose }) => {
           <CloseIcon />
         </IconButton>
 
-        <Typography variant="h5" fontWeight="bold">
+        <Typography
+          sx={{
+            fontWeight: 'bold',
+            fontSize: { xs: 20, sm: 24 }
+          }}
+        >
           Welcome Back ☕
         </Typography>
-        <Typography variant="body2" sx={{ opacity: 0.9 }}>
+
+        <Typography
+          sx={{
+            opacity: 0.9,
+            fontSize: { xs: 13, sm: 14 }
+          }}
+        >
           Login to enjoy authentic filter coffee
         </Typography>
       </Box>
 
       {/* Content */}
-      <DialogContent sx={{ p: 3 }}>
-        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+      <DialogContent sx={{ p: { xs: 2, sm: 3 } }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: { xs: 1.5, sm: 2 } }}>
+
           <TextField
             label="Email"
             fullWidth
-            variant="outlined"
+            size={fullScreen ? 'medium' : 'small'}
           />
 
           <TextField
             label="Password"
             type="password"
             fullWidth
-            variant="outlined"
+            size={fullScreen ? 'medium' : 'small'}
           />
 
           <Typography
-            variant="body2"
             sx={{
               textAlign: 'right',
               color: '#440E03',
-              cursor: 'pointer'
+              cursor: 'pointer',
+              fontSize: { xs: 12, sm: 13 }
             }}
           >
             Forgot password?
@@ -93,10 +108,12 @@ const Login = ({ open, onClose }) => {
 
           <Button
             variant="contained"
+            fullWidth
             sx={{
               mt: 1,
-              py: 1.2,
+              py: { xs: 1.2, sm: 1 },
               fontWeight: 'bold',
+              fontSize: { xs: 14, sm: 15 },
               backgroundColor: '#440E03',
               borderRadius: 3,
               '&:hover': { backgroundColor: '#5a1608' }
@@ -105,9 +122,12 @@ const Login = ({ open, onClose }) => {
             Login
           </Button>
 
-          <Divider sx={{ my: 2 }} />
+          <Divider sx={{ my: { xs: 2, sm: 2 } }} />
 
-          <Typography variant="body2" textAlign="center">
+          <Typography
+            textAlign="center"
+            sx={{ fontSize: { xs: 12, sm: 13 } }}
+          >
             Don’t have an account?{' '}
             <span
               style={{
@@ -119,6 +139,7 @@ const Login = ({ open, onClose }) => {
               Sign up
             </span>
           </Typography>
+
         </Box>
       </DialogContent>
     </Dialog>

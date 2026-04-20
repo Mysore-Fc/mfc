@@ -17,31 +17,59 @@ const MenuCategory = () => {
   ]
 
   return (
-    <Box sx={{ maxWidth: 900, mx: 'auto', p: 4 }}>
+    <Box
+      sx={{
+        maxWidth: 900,
+        mx: 'auto',
+        px: { xs: 2, sm: 3, md: 4 },
+        py: { xs: 3, md: 5 }
+      }}
+    >
 
-      <Typography variant="h4" textAlign="center" mb={4}>
+      {/* Title */}
+      <Typography
+        sx={{
+          textAlign: 'center',
+          mb: { xs: 3, md: 4 },
+          fontWeight: 'bold',
+          fontSize: { xs: 22, sm: 26, md: 32 }
+        }}
+      >
         Select Menu Type
       </Typography>
 
-      <Grid container spacing={3}>
+      {/* Cards */}
+      <Grid container spacing={{ xs: 2, sm: 3 }}>
         {categories.map((cat) => (
           <Grid item xs={12} sm={6} key={cat.id}>
             <Card
+              onClick={() => navigate(`/menu/${cat.type}`)}
               sx={{
                 cursor: 'pointer',
                 textAlign: 'center',
-                p: 4,
+                py: { xs: 3, md: 5 },
+                px: 2,
                 borderRadius: 3,
                 boxShadow: 3,
+                transition: '0.3s',
+                
+                // Hover only on desktop
                 '&:hover': {
-                  backgroundColor: '#440E03',
-                  color: 'white'
+                  backgroundColor: { xs: 'inherit', md: '#440E03' },
+                  color: { xs: 'inherit', md: 'white' },
+                  transform: { md: 'scale(1.05)' }
                 }
               }}
-              onClick={() => navigate(`/menu/${cat.type}`)}
             >
               <CardContent>
-                <Typography variant="h6">{cat.name}</Typography>
+                <Typography
+                  sx={{
+                    fontWeight: 'bold',
+                    fontSize: { xs: 18, md: 22 }
+                  }}
+                >
+                  {cat.name}
+                </Typography>
               </CardContent>
             </Card>
           </Grid>
